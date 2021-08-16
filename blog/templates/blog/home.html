@@ -1,16 +1,48 @@
-this is html blog 
-<br/>
-welcome to my site
+{% extends 'blog/base.html' %}
+{% block main %}
+{% load static %}
+  <!-- Page Header-->
+        <header class="masthead" style="background-image: url('{% static 'blog/assets/img/home-bg.jpg' %}')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>webloot</h1>
+                            <span class="subheading">طراحی وب سایت حرفه ای</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-<p>{{name}}</p>
-<p>{{age}}</p>
-<p>{{job}}</p>
-<hr>
 
-{% for article in articles %}
-<article>
-    <img src="{{article.img}}" alt="{{article.title}}">
-    <h1>{{article.title}}</h1>
-    <p>{{article.descriptions}}</p>
-</article>
-{% endfor %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+        {% for article in articles %}
+              <!-- Post preview-->
+            <div class="post-preview">
+                <a href="{% url 'blog:detail_article' article.slug %}">
+                    <h2 class="post-title">{{article.title}}</h2>
+                    <h3 class="post-subtitle">{{article.descriptions | truncatewords:30}}</h3>
+                </a>
+                <p class="post-meta">
+                    نوشته شده توسط 
+                    <a href="#">آرش زارع</a>
+                    {{article.publish}}
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+            <!-- Post preview-->
+
+        {% endfor %}
+           
+           
+            <!-- Pager-->
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

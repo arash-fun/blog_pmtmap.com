@@ -1,0 +1,18 @@
+<!-- this is html blog 
+<br/>
+welcome to my site
+
+<p>{{name}}</p>
+<p>{{age}}</p>
+<p>{{job}}</p>
+<hr> -->
+
+{% for article in articles %}
+    <article>
+        <img src="{{article.thumbnail.url}}" alt="{{article.title}}" width="600" height="350">
+        <!-- <h1>{{article.title}}</h1> -->
+        <h1> <a href="{% url 'blog:detail_article' article.slug %}">{{article.title}}</a></h1>
+        <small>{{article.publish }}</small>
+        <p>{{article.descriptions}}</p>
+    </article>
+{% endfor %}

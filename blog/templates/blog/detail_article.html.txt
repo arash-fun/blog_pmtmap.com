@@ -1,0 +1,7 @@
+<article>
+    <img src="{{article.thumbnail.url}}" alt="{{article.title}}" width="600" height="350">
+    <!-- <h1>{{article.title}}</h1> -->
+    <h1> <a href="{{article.slug}}">{{article.title}}</a></h1>
+    <small>{{article.publish }}</small>
+    <p>{{article.descriptions}}</p>
+</article>
