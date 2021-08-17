@@ -1,16 +1,16 @@
 from django.shortcuts import get_object_or_404, render
 # from django.http import HttpResponse , JsonResponse
-from .models import Article
+from .models import Article, Category
 
 # Create your views here.
 
 def home(request):
-    context={
-        'name': 'arash',
-        'age': 25,
-        'job':'programmer' 
-    }
-    # context ={
+    # context={
+    #     'name': 'arash',
+    #     'age': 25,
+    #     'job':'programmer' 
+    # }
+    # # context ={
     #     'articles':
     #     [
     #         {
@@ -32,7 +32,9 @@ def home(request):
     # }
 
     context ={
-        'articles':Article.objects.filter(status = 'p').order_by('-publish')
+        'articles':Article.objects.filter(status = 'p') ,
+        # category added for show in home page
+        'category':Category.objects.filter(status=True)
     }
     return render(request , "blog/home.html" , context ) 
 
