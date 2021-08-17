@@ -2,13 +2,14 @@ from django.contrib import admin
 from django.contrib.admin.filters import ListFilter
 from django.db import models
 from .models import Article 
+
 # Register your models here.
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display =(
         'title',
         'slug',
-        'publish',
+        'jpublish',
         'status'
     )
 
