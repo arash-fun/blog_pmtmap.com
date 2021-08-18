@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 # from django.http import HttpResponse , JsonResponse
-from .models import Article, Category
+from .models import Article, Category 
 
 # Create your views here.
 
@@ -32,24 +32,33 @@ def home(request):
     # }
 
     context ={
-        'articles':Article.objects.filter(status = 'p') ,
+        # use manager instead of status = ...
+        # 'articles':Article.objects.filter(status = 'p') ,
+        'articles':Article.objects.published(),
+
         # category added for show in home page
-        'category':Category.objects.filter(status=True)
+        # 'category':Category.objects.filter(status=True)
     }
     return render(request , "blog/home.html" , context ) 
 
 def detail_article(request , slug ):
     context = {
         # 'article':Article.objects.get(slug = slug)
-        'article':get_object_or_404(Article , slug = slug , status = 'p'),
+        # use manager instead of status = ...
+        # 'article':get_object_or_404(Article , slug = slug , status = 'p'),
+
+        'article':get_object_or_404(Article.objects.published() , slug = slug ),
+
         # 'category':Category.objects.filter(status=True)
     }
     return render (request , 'blog/detail_article.html' , context)
 
 def category(request,slug ):
     context = {
-
+        
+        # 'category':get_object_or_404(Category , slug = slug , status =True),
         'category':get_object_or_404(Category , slug = slug , status =True),
+
     }
     return render (request , 'blog/category.html' , context)
 
