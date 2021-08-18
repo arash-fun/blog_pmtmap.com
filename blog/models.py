@@ -7,8 +7,8 @@ from extensions.utils import jalali_converter
 
 class Category(models.Model):
     title = models.CharField(max_length=200 , verbose_name='عنوان دسته بندی')
-    slug = models.SlugField(max_length=100 , verbose_name='اسلاگ دسته بندی')
-    status = models.BooleanField(verbose_name='آیا دسته نمایش داده شود؟')
+    slug = models.SlugField(max_length=100 ,unique=True ,verbose_name='اسلاگ دسته بندی')
+    status = models.BooleanField(default=True, verbose_name='آیا دسته نمایش داده شود؟')
     position = models.IntegerField(verbose_name='پوزیشن')
     class Meta:
         verbose_name = 'دسته بندی'
@@ -26,8 +26,8 @@ class Article(models.Model):
         ('p','منتشر شده'),
     )
     title = models.CharField(max_length=255 , verbose_name='عنوان')
-    slug = models.SlugField(max_length=100 , verbose_name='اسلاگ')
-    category = models.ManyToManyField(Category,verbose_name='دسته بندی')
+    slug = models.SlugField(max_length=100 , unique=True,verbose_name='اسلاگ')
+    category = models.ManyToManyField(Category,verbose_name='دسته بندی', related_name='articles')
     descriptions = models.TextField(verbose_name='توضیحات')
     thumbnail = models.ImageField(upload_to='images' ,blank = True, null=True , verbose_name='تصویر')
     publish = models.DateTimeField(default=timezone.now , verbose_name='زمان انتشار')
@@ -39,6 +39,7 @@ class Article(models.Model):
     class Meta :
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقالات'
+        ordering=['-publish']
 
 
     def __str__(self):

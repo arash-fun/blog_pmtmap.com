@@ -41,9 +41,23 @@ def home(request):
 def detail_article(request , slug ):
     context = {
         # 'article':Article.objects.get(slug = slug)
-        'article':get_object_or_404(Article , slug = slug , status = 'p')
+        'article':get_object_or_404(Article , slug = slug , status = 'p'),
+        'category':Category.objects.filter(status=True)
     }
     return render (request , 'blog/detail_article.html' , context)
+
+def category(request,slug ):
+    context = {
+        
+        'category':get_object_or_404(Category , slug = slug , status =True),
+    }
+    return render (request , 'blog/category.html' , context)
+
+
+
+
+
+
 
 # def home(request):
 #     return HttpResponse ('welcome to webloot')
