@@ -5,6 +5,15 @@ from django.utils import timezone
 from extensions.utils import jalali_converter
 # Create your models here.
 
+# managers in django ,(object is a manager for example)
+# my manager
+class ArtilceManager(models.Manager):
+    def published(self):
+        return self.filter(status = 'p')
+
+
+
+
 class Category(models.Model):
     title = models.CharField(max_length=200 , verbose_name='عنوان دسته بندی')
     slug = models.SlugField(max_length=100 ,unique=True ,verbose_name='اسلاگ دسته بندی')
@@ -48,3 +57,10 @@ class Article(models.Model):
     def jpublish(self):
         return jalali_converter(self.publish)
     jpublish.short_description = 'زمان انتشار'
+
+    # method for just show published category , and we used in template to doesnot show no published cats
+    def category_published(self):
+        return self.category.filter(status = True)
+    
+    # and continue of my manager
+    objects = ArtilceManager()
