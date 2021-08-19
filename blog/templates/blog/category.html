@@ -25,7 +25,7 @@
             <!-- my manger in models.py -->
 
         {% comment %} {% for article in category.article.all %} {% endcomment %}
-            {% for article in category.article.published %}
+            {% for article in category.articles.published %}
 
               <!-- Post preview-->
             <div class="post-preview">
@@ -40,8 +40,8 @@
                 </p>
                 <div>
                  <!-- models.py category_published -->
-                    {% for cat in article_published.category.all %}
-                    <a href="#"> # {{cat.title}}</a>
+                    {% for cat in article.category_published.all %}
+                    <a href="{% url 'blog:category' cat.slug %}"> # {{cat.title}}</a>
                     
                     {% endfor %}
                 </div>
