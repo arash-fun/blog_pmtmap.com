@@ -26,3 +26,13 @@ body{
 .navbar-brand {
     font-size: xx-large;
 }
+header.masthead .site-heading h1 {
+    font-size: 40px;
+    
+}
+h2.post-title {
+    font-size: 32px !important;
+}
+.post-subtitle {
+    font-size: 20px !important
+}

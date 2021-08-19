@@ -1,10 +1,18 @@
+# paginator
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
 # from django.http import HttpResponse , JsonResponse
 from .models import Article, Category 
 
+
 # Create your views here.
 
-def home(request):
+def home(request , page=1 ):
+    articles_list = Article.objects.published()
+    paginator = Paginator(articles_list , 2)
+    # page = request.GET.get('page')
+    articles = paginator.get_page(page)
+
     # context={
     #     'name': 'arash',
     #     'age': 25,
@@ -34,7 +42,8 @@ def home(request):
     context ={
         # use manager instead of status = ...
         # 'articles':Article.objects.filter(status = 'p') ,
-        'articles':Article.objects.published(),
+        # 'articles':Article.objects.published(),
+        'articles':articles,
 
         # category added for show in home page
         # 'category':Category.objects.filter(status=True)
@@ -53,10 +62,16 @@ def detail_article(request , slug ):
     }
     return render (request , 'blog/detail_article.html' , context)
 
-def category(request,slug ):
+def category(request,slug ,page =1):
+    category = get_object_or_404(Category , slug = slug , status =True)
+    articles_list = category.articles.published()
+    paginator = Paginator(articles_list , 4)
+    articles = paginator.get_page(page)
+
     context = {
-        
-        'category':get_object_or_404(Category , slug = slug , status =True),
+
+        'category': category,
+        'articles':articles
 
     }
     return render (request , 'blog/category.html' , context)

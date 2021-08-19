@@ -27,13 +27,13 @@
             <!-- my manger in models.py -->
 
         {% comment %} {% for article in category.article.all %} {% endcomment %}
-            {% for article in category.articles.published %}
+            {% for article in articles %}
 
               <!-- Post preview-->
             <div class="post-preview">
                 <a href="{% url 'blog:detail_article' article.slug %}">
                     <h2 class="post-title">{{article.title}}</h2>
-                    <h3 class="post-subtitle">{{article.descriptions | truncatewords:30}}</h3>
+                    <h4 class="post-subtitle">{{article.descriptions | truncatewords:30}}</h4>
                 </a>
                 <p class="post-meta">
                     نوشته شده توسط 
@@ -56,7 +56,15 @@
            
            
             <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">  پست های قدیمی &larr;</a></div>
+            <!-- Pager-->
+            <div class="d-flex justify-content-between mb-4">
+                {% if articles.has_previous %}
+            <a class="btn btn-primary  text-uppercase " href="{% url 'blog:category' category.slug articles.previous_page_number%}"> &rarr; پست های جدید </a>
+                {% endif %}
+                {% if articles.has_next %}
+            <a class="btn btn-primary text-uppercase d" href="{% url 'blog:category' category.slug articles.next_page_number%}">  پست های قدیمی &larr;</a>
+                {% endif %}            
+            </div>
         </div>
     </div>
 </div>
