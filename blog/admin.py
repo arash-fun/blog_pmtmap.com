@@ -10,6 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
         'position',
         'title',
         'slug',
+        'parent',
         'status'
     )
 
@@ -17,6 +18,7 @@ class CategoryAdmin(admin.ModelAdmin):
    
     search_fields = ('title' ,'slug')
     prepopulated_fields = {'slug':('title',)}
+    
     
 
 
