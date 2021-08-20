@@ -12,7 +12,9 @@ class ArtilceManager(models.Manager):
     def published(self):
         return self.filter(status = 'p')
 
-
+class CategoryManager(models.Manager):
+    def active(self):
+        return self.filter(status = True)
 
 
 class Category(models.Model):
@@ -28,6 +30,8 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    # manager for category
+    objects = CategoryManager()
 
 class Article(models.Model):
     STATUS_CHOICES =(
@@ -66,3 +70,5 @@ class Article(models.Model):
     
     # and continue of my manager
     objects = ArtilceManager()
+
+  

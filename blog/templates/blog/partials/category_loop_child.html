@@ -2,7 +2,11 @@
     {% for cat in cat.children.all %}
         <li class="nav-item ">
             <a class="nav-link " href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a>
-                {% if cat.children.all %}
+                
+                   <!-- use categorymanager for filter  -->
+                    {% comment %} {% if cat.children.all %} {% endcomment %}
+                    {% if cat.children.active %}
+                    
                     {% include 'blog/partials/category_loop_child.html' %}
                 {%endif%}
         </li>
