@@ -10,8 +10,8 @@
 /* finish */
 
 body{
-    direction: rtl;
-    text-align: right;
+    direction: ltr;
+    text-align: left;
     font-family: "Sahel";
     font-size: 16px;
 }

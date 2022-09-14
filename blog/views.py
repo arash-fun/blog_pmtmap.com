@@ -9,7 +9,7 @@ from .models import Article, Category
 
 def home(request , page=1 ):
     articles_list = Article.objects.published()
-    paginator = Paginator(articles_list , 2)
+    paginator = Paginator(articles_list , 4)
     # page = request.GET.get('page')
     articles = paginator.get_page(page)
 
@@ -61,6 +61,7 @@ def detail_article(request , slug ):
         # 'category':Category.objects.filter(status=True)
     }
     return render (request , 'blog/detail_article.html' , context)
+
 
 def category(request,slug ,page =1):
     category = get_object_or_404(Category , slug = slug , status =True)

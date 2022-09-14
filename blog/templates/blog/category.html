@@ -7,8 +7,8 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1>وِبلوط</h1>
-                            <span class="subheading">طراحی وب سایت حرفه ای</span>
+                            <h1>PmtMap</h1>
+                            <span class="subheading">Persian Merchant Trade Map</span>
                         </div>
                     </div>
                 </div>
@@ -20,11 +20,11 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
-            <h3 class="alert alert-secondary text-center"> دسته بندی: {{category.title}}</h3>
+            <h3 class="alert alert-secondary text-center"> Category: {{category.title}}</h3>
             <!-- articles is telated_name in model category manytomany -->
             <!-- here we should user manager in django for filter published ..>
                    
-            <!-- my manger in models.py -->
+            my manger in models.py -->
 
         {% comment %} {% for article in category.article.all %} {% endcomment %}
             {% for article in articles %}
@@ -33,11 +33,11 @@
             <div class="post-preview">
                 <a href="{% url 'blog:detail_article' article.slug %}">
                     <h2 class="post-title">{{article.title}}</h2>
-                    <h4 class="post-subtitle">{{article.descriptions | truncatewords:30}}</h4>
+                    <h4 class="post-subtitle">{{article.descriptions | truncatewords:30 | safe}}</h4>
                 </a>
                 <p class="post-meta">
                     نوشته شده توسط 
-                    <a href="#">آرش زارع</a>
+                    <a href="#">حسین محمودی</a>
                     {{article.jpublish}}
                 </p>
                 <div>

@@ -242,6 +242,9 @@ a:hover {
   color: #0085A1;
 }
 
+/* selected link */
+
+
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
   color: inherit;
   text-decoration: none;
@@ -3982,6 +3985,7 @@ textarea.form-control-lg {
   justify-content: space-between;
 }
 .navbar-brand {
+  margin-left: -50px;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;

@@ -2,8 +2,18 @@ from django.contrib import admin
 from django.contrib.admin.filters import ListFilter
 from django.db import models
 from .models import Article , Category
+from django_summernote.admin import SummernoteModelAdmin
+
 
 # Register your models here.
+
+
+# class ArticleAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
+#     summernote_fields = ('descriptions',)
+
+# admin.site.register(Article, ArticleAdmin)
+
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display =(
@@ -26,7 +36,8 @@ admin.site.register(Category , CategoryAdmin)
 
 
 
-class ArticleAdmin(admin.ModelAdmin):
+class ArticleAdmin(SummernoteModelAdmin):
+    summernote_fields = ('descriptions',)
     list_display =(
 
         'title',
@@ -48,6 +59,7 @@ class ArticleAdmin(admin.ModelAdmin):
     # ordering - means decrising order
     ordering = ['-status' , '-publish']
     # for show category here , for manytomanyField
+
     def category_to_str(self , obj ):
         return ','.join([category.title for category in obj.category_published()])
     category_to_str.short_description = 'دسته بندی'
